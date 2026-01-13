@@ -11,7 +11,7 @@ const Layout: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 font-sans text-fab-dark">
+    <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-800 selection:bg-fab-gold/30">
       {/* Top Bar - Utility & Social */}
       <div className="bg-fab-blue text-white text-xs py-2 px-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -35,21 +35,21 @@ const Layout: React.FC = () => {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200/60 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-24">
-            
+
             {/* Logo Area */}
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center gap-3 group">
-                <img 
-                  src="https://www.aafab.org.br/wp-content/uploads/2019/07/logo-aafab-1.png" 
-                  alt="Logo AAFAB" 
+                <img
+                  src="/Logoaafab.png"
+                  alt="Logo AAFAB"
                   className="h-16 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="flex flex-col">
-                  <span className="font-serif font-bold text-2xl text-fab-blue leading-none tracking-tight group-hover:text-fab-blue/80">AAFAB</span>
-                  <span className="text-[0.6rem] uppercase tracking-widest text-gray-500 font-medium hidden sm:block">Amigos da Força Aérea Brasileira</span>
+                  <span className="font-serif font-bold text-2xl text-fab-blue leading-none tracking-tight group-hover:text-fab-blue/80 transition-colors">AAFAB</span>
+                  <span className="text-[0.6rem] uppercase tracking-[0.2em] text-slate-500 font-medium hidden sm:block mt-1">AMIGOS DA FORÇA AÉREA BRASILEIRA</span>
                 </div>
               </Link>
             </div>
@@ -60,14 +60,14 @@ const Layout: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-sm font-medium uppercase tracking-wide transition-colors ${
-                    isActive(item.href) ? 'text-fab-blue border-b-2 border-fab-gold pb-1' : 'text-gray-600 hover:text-fab-blue'
-                  }`}
+                  className={`text-sm font-medium uppercase tracking-wide transition-all duration-200 relative group px-1 py-4 ${isActive(item.href) ? 'text-fab-blue' : 'text-slate-600 hover:text-fab-blue'
+                    }`}
                 >
                   {item.name}
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-fab-gold transform origin-left transition-transform duration-300 ${isActive(item.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
                 </Link>
               ))}
-              
+
               {/* Dropdown simplified for demo */}
               <div className="relative group">
                 <button className="flex items-center text-sm font-medium uppercase tracking-wide text-gray-600 hover:text-fab-blue">
@@ -141,21 +141,24 @@ const Layout: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-fab-blue text-white pt-12 pb-6">
+      <footer className="bg-fab-blue text-white pt-16 pb-8 border-t border-blue-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            
+
             {/* Column 1: Brand */}
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center gap-3 mb-4">
                 <div className="bg-white p-1 rounded-full w-12 h-12 flex items-center justify-center">
-                  <img 
-                    src="https://www.aafab.org.br/wp-content/uploads/2019/07/logo-aafab-1.png" 
-                    alt="Logo AAFAB" 
+                  <img
+                    src="/Logoaafab.png"
+                    alt="Logo AAFAB"
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <span className="font-serif font-bold text-xl">AAFAB</span>
+                <div className="flex flex-col">
+                  <span className="font-serif font-bold text-xl">AAFAB</span>
+                  <span className="text-[0.6rem] uppercase tracking-wider text-gray-300 font-medium">AMIGOS DA FORÇA AÉREA BRASILEIRA</span>
+                </div>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
                 Promovendo a união, preservando a história e discutindo o futuro da defesa nacional com responsabilidade e ética.
@@ -190,14 +193,14 @@ const Layout: React.FC = () => {
               </ul>
             </div>
 
-             {/* Column 4: Contact/Newsletter */}
-             <div>
+            {/* Column 4: Contact/Newsletter */}
+            <div>
               <h3 className="text-fab-gold font-bold uppercase tracking-wider text-sm mb-4">Contato</h3>
               <ul className="space-y-2 text-sm text-gray-300 mb-6">
                 <li className="flex items-center gap-2"><Mail size={16} /> contato@aafab.org.br</li>
                 <li>Brasília - DF</li>
               </ul>
-              
+
               <h3 className="text-fab-gold font-bold uppercase tracking-wider text-sm mb-2">Newsletter</h3>
               <div className="flex">
                 <input type="email" placeholder="Seu e-mail" className="bg-blue-900 text-white px-3 py-2 text-sm w-full focus:outline-none border border-blue-800" />
@@ -206,7 +209,7 @@ const Layout: React.FC = () => {
             </div>
 
           </div>
-          
+
           <div className="border-t border-blue-900 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
             <p>&copy; {new Date().getFullYear()} AAFAB. Todos os direitos reservados.</p>
             <div className="flex gap-4 mt-4 md:mt-0">
